@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path,include
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework import renderers
 from snippets.views import api_root, SnippetViewSet, UserViewSet
@@ -26,6 +26,7 @@ user_detail = UserViewSet.as_view({
 # API endpoints
 urlpatterns = format_suffix_patterns([
     path('', api_root),
+    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     path('snippets/', snippet_list, name='snippet-list'),
     path('snippets/<int:pk>/', snippet_detail, name='snippet-detail'),
     path('snippets/<int:pk>/highlight/', snippet_highlight, name='snippet-highlight'),
